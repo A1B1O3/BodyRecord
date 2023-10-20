@@ -10,4 +10,5 @@ public interface BodyRepository extends JpaRepository<Body,Long> {
     boolean existsByMemberIdAndBodyCode(final Long memberId, final Long bodyCode);
     List<Body> findAllByMemberId(final Long memberId);
 
+
 }

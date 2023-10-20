@@ -13,4 +13,5 @@ public class BodyRequest {
     private final Long fat;
     @NotBlank(message="골격근량을 입력해주세요")
     private final Long muscle;
+
 }
