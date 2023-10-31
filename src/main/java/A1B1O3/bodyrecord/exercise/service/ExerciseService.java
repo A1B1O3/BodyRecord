@@ -7,7 +7,7 @@ import A1B1O3.bodyrecord.exercise.dto.request.ExerciseRequest;
 import A1B1O3.bodyrecord.exercise.dto.request.ExerciseUpdateRequest;
 import A1B1O3.bodyrecord.exercise.dto.response.ExerciseDetailResponse;
 import A1B1O3.bodyrecord.exercise.dto.response.ExerciseResponse;
-import A1B1O3.bodyrecord.exercise.dto.response.SearchCategoryResponse;
+import A1B1O3.bodyrecord.exercise.dto.response.SearchResponse;
 import A1B1O3.bodyrecord.member.Member;
 import A1B1O3.bodyrecord.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -77,12 +77,21 @@ public class ExerciseService {
     }
 
     @Transactional(readOnly = true)
-    public List<SearchCategoryResponse> searchCategory(final boolean exerciseShare, final int goalCategoryCode) {
+    public List<SearchResponse> searchCategory(final boolean exerciseShare, final int goalCategoryCode) {
 
         final List<Exercise> searchCategoryExercise = exerciseRepository.findByExerciseShareAndMemberGoalCategoryGoalCategoryCode(exerciseShare,goalCategoryCode);
 
         return searchCategoryExercise.stream()
-                .map(exercise -> SearchCategoryResponse.from(exercise))
+                .map(exercise -> SearchResponse.from(exercise))
+                .collect(Collectors.toList());
+    }
+    @Transactional(readOnly = true)
+    public List<SearchResponse> searchBody(final boolean exerciseShare, final float weight, final float fat, final float muscle) {
+
+        final  List<Exercise> searchBodyExercise = exerciseRepository.findByExerciseShareAndMemberBodyWeightAndMemberBodyFatAndMemberBodyMuscle(exerciseShare,weight,fat,muscle);
+
+        return searchBodyExercise.stream()
+                .map(exercise -> SearchResponse.from(exercise))
                 .collect(Collectors.toList());
     }
 

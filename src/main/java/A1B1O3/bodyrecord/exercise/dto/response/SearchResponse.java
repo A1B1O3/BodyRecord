@@ -10,7 +10,7 @@ import static lombok.AccessLevel.PRIVATE;
 
 @Getter
 @RequiredArgsConstructor(access = PRIVATE)
-public class SearchCategoryResponse {
+public class SearchResponse {
 
     private final String exerciseName;
 
@@ -24,14 +24,17 @@ public class SearchCategoryResponse {
 
     private final int goalCategoryCode;
 
-    public static SearchCategoryResponse from(final Exercise exercise){
-        return new SearchCategoryResponse(
+    private final float weight;
+
+    public static SearchResponse from(final Exercise exercise){
+        return new SearchResponse(
                 exercise.getExerciseName(),
                 exercise.getExerciseWeight(),
                 exercise.getExerciseCount(),
                 exercise.getExerciseTime(),
                 exercise.getExerciseShare(),
-                exercise.getMember().getGoalCategory().getGoalCategoryCode()
+                exercise.getMember().getGoalCategory().getGoalCategoryCode(),
+                exercise.getMember().getBody().getWeight()
         );
     }
 

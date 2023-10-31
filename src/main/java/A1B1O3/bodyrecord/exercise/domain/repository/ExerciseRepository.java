@@ -18,4 +18,6 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Integer> {
     List<Exercise> findByExerciseShareAndMemberGoalCategoryGoalCategoryCode(final boolean exerciseShare, final int goalCategoryCode);
 
     List<Exercise> findByExerciseShareAndMemberBodyWeightAndMemberBodyFatAndMemberBodyMuscle(final boolean exerciseShare, final float weight, final float fat, final float muscle);
+
+    List<Exercise> findByExerciseShareAndMemberBodyWeight(final boolean exerciseShare, final float weight);
 }

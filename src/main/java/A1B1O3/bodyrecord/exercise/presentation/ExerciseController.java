@@ -4,7 +4,7 @@ import A1B1O3.bodyrecord.exercise.dto.request.ExerciseRequest;
 import A1B1O3.bodyrecord.exercise.dto.request.ExerciseUpdateRequest;
 import A1B1O3.bodyrecord.exercise.dto.response.ExerciseDetailResponse;
 import A1B1O3.bodyrecord.exercise.dto.response.ExerciseResponse;
-import A1B1O3.bodyrecord.exercise.dto.response.SearchCategoryResponse;
+import A1B1O3.bodyrecord.exercise.dto.response.SearchResponse;
 import A1B1O3.bodyrecord.exercise.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -47,13 +47,20 @@ public class ExerciseController {
 
     /*운동기록 카테고리별 검색*/
     @GetMapping("/search/category/{goalCategoryCode}")
-    public ResponseEntity<List<SearchCategoryResponse>> searchCategoryExercise(@PathVariable final int goalCategoryCode){
+    public ResponseEntity<List<SearchResponse>> searchCategoryExercise(@PathVariable final int goalCategoryCode){
 
-        final List<SearchCategoryResponse> searchCategoryResponse = exerciseService.searchCategory(true, goalCategoryCode);
-        return ResponseEntity.ok(searchCategoryResponse);
+        final List<SearchResponse> searchResponse = exerciseService.searchCategory(true, goalCategoryCode);
+        return ResponseEntity.ok(searchResponse);
     }
 
-    @GetMapping("")
+    /*운동기록 체성분별 검색*/
+    @GetMapping("/search/body/{weight}/{fat}/{muscle}")
+    public ResponseEntity<List<SearchResponse>> searchBodyExercise(@PathVariable final float weight, @PathVariable final float fat, @PathVariable final float muscle){
+
+        final List<SearchResponse> searchResponse = exerciseService.searchBody(true, weight, fat, muscle);
+        return ResponseEntity.ok(searchResponse);
+    }
+
     /*운동기록 삭제*/
     @DeleteMapping("/{exerciseCode}")
     public ResponseEntity<Void> deleteExercise(/*접근자*/ @PathVariable final int exerciseCode){
